@@ -39,13 +39,7 @@ namespace Lauren
         {
             Image Orig = Image.FromFile(openFileDialog1.FileName);
             PicOrig.Image = Orig;
-
             FocalPoint = new Point(Orig.Size.Width / 2, Orig.Size.Height / 2);
-
-            Orig_X.Text = Orig.Size.Width.ToString();
-            Orig_Y.Text = Orig.Size.Height.ToString();
-            System.IO.FileInfo fi = new System.IO.FileInfo(openFileDialog1.FileName);
-            Orig_Size.Text = fi.Length.ToString();
         }
 
         private Point DrawFocalPoint(Point xy)
