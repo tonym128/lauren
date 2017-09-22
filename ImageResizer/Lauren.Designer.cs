@@ -33,19 +33,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.PicOrig = new System.Windows.Forms.PictureBox();
-            this.PicSmaller = new System.Windows.Forms.PictureBox();
-            this.PicSmallest = new System.Windows.Forms.PictureBox();
-            this.Pic_Large = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Pic_Mid = new System.Windows.Forms.PictureBox();
-            this.pic_Ban = new System.Windows.Forms.PictureBox();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PicOrig)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicSmaller)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicSmallest)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Large)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Mid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Ban)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -54,7 +48,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(455, 9);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(374, 429);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -76,40 +71,16 @@
             // 
             // PicOrig
             // 
+            this.PicOrig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PicOrig.Location = new System.Drawing.Point(12, 95);
             this.PicOrig.Name = "PicOrig";
-            this.PicOrig.Size = new System.Drawing.Size(386, 243);
+            this.PicOrig.Size = new System.Drawing.Size(437, 328);
             this.PicOrig.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PicOrig.TabIndex = 2;
             this.PicOrig.TabStop = false;
             this.PicOrig.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PicOrig_MouseDown);
-            // 
-            // PicSmaller
-            // 
-            this.PicSmaller.Location = new System.Drawing.Point(624, 691);
-            this.PicSmaller.Name = "PicSmaller";
-            this.PicSmaller.Size = new System.Drawing.Size(190, 100);
-            this.PicSmaller.TabIndex = 3;
-            this.PicSmaller.TabStop = false;
-            this.PicSmaller.Tag = "Smaller";
-            // 
-            // PicSmallest
-            // 
-            this.PicSmallest.Location = new System.Drawing.Point(820, 727);
-            this.PicSmallest.Name = "PicSmallest";
-            this.PicSmallest.Size = new System.Drawing.Size(65, 65);
-            this.PicSmallest.TabIndex = 4;
-            this.PicSmallest.TabStop = false;
-            this.PicSmallest.Tag = "Smallest";
-            // 
-            // Pic_Large
-            // 
-            this.Pic_Large.Location = new System.Drawing.Point(12, 421);
-            this.Pic_Large.Name = "Pic_Large";
-            this.Pic_Large.Size = new System.Drawing.Size(300, 370);
-            this.Pic_Large.TabIndex = 14;
-            this.Pic_Large.TabStop = false;
-            this.Pic_Large.Tag = "Lrg";
             // 
             // pictureBox1
             // 
@@ -120,50 +91,59 @@
             this.pictureBox1.TabIndex = 18;
             this.pictureBox1.TabStop = false;
             // 
-            // Pic_Mid
+            // trackBar1
             // 
-            this.Pic_Mid.Location = new System.Drawing.Point(318, 566);
-            this.Pic_Mid.Name = "Pic_Mid";
-            this.Pic_Mid.Size = new System.Drawing.Size(300, 225);
-            this.Pic_Mid.TabIndex = 25;
-            this.Pic_Mid.TabStop = false;
-            this.Pic_Mid.Tag = "Mid";
+            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBar1.Location = new System.Drawing.Point(12, 429);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(352, 45);
+            this.trackBar1.TabIndex = 19;
+            this.trackBar1.Value = 70;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
             // 
-            // pic_Ban
+            // label1
             // 
-            this.pic_Ban.Location = new System.Drawing.Point(404, 95);
-            this.pic_Ban.Name = "pic_Ban";
-            this.pic_Ban.Size = new System.Drawing.Size(780, 465);
-            this.pic_Ban.TabIndex = 26;
-            this.pic_Ban.TabStop = false;
-            this.pic_Ban.Tag = "Ban";
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(371, 461);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Quality : ";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(416, 461);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(13, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "0";
             // 
             // Lauren
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1209, 818);
-            this.Controls.Add(this.pic_Ban);
-            this.Controls.Add(this.Pic_Mid);
+            this.ClientSize = new System.Drawing.Size(455, 478);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.PicSmallest);
-            this.Controls.Add(this.PicSmaller);
             this.Controls.Add(this.PicOrig);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.Pic_Large);
             this.Name = "Lauren";
             this.Text = "Lauren - Largely AUtomated REsiziNg tool";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.ImageResizer_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.ImageResizer_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.PicOrig)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicSmaller)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PicSmallest)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Large)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Mid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Ban)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,12 +155,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox PicOrig;
-        private System.Windows.Forms.PictureBox PicSmaller;
-        private System.Windows.Forms.PictureBox PicSmallest;
-        private System.Windows.Forms.PictureBox Pic_Large;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox Pic_Mid;
-        private System.Windows.Forms.PictureBox pic_Ban;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

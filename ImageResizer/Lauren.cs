@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +15,29 @@ namespace Lauren
     public partial class Lauren : Form
     {
         static Point FocalPoint = new Point(0, 0);
-        static String File = string.Empty;
+        static string File = string.Empty;
+        List<PictureBox> pictureBoxes = new List<PictureBox>();
+
         public Lauren()
         {
             InitializeComponent();
+            List<String> sizes = Properties.Settings.Default.Sizes.Split(';').ToList();
+
+            foreach (string size in sizes)
+            {
+                pictureBoxes.Add(createPictureBox(Convert.ToInt16(size.Split('x').First()), Convert.ToInt16(size.Split('x').Last())));
+            }
+
+            trackBar1.Value = (int)Properties.Settings.Default.DefaultCompression;
+            label2.Text = trackBar1.Value.ToString();
+        }
+
+        private PictureBox createPictureBox(int x, int y)
+        {
+            PictureBox picture = new PictureBox();
+            picture.Size = new Size(x, y);
+            picture.Tag = String.Format("{0}x{1}", x, y);
+            return picture;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -60,11 +81,10 @@ namespace Lauren
             Image Orig = Image.FromFile(openFileDialog1.FileName);
             PicOrig.Image = Orig;
 
-            Resize_Image(openFileDialog1.FileName, PicOrig.Image, ref PicSmallest);
-            Resize_Image(openFileDialog1.FileName, PicOrig.Image, ref PicSmaller);
-            Resize_Image(openFileDialog1.FileName, PicOrig.Image, ref Pic_Large);
-            Resize_Image(openFileDialog1.FileName, PicOrig.Image, ref pic_Ban);
-            Resize_Image(openFileDialog1.FileName, PicOrig.Image, ref Pic_Mid);
+            foreach (PictureBox pictureBox in pictureBoxes)
+            {
+                Resize_Image(openFileDialog1.FileName, PicOrig.Image, pictureBox);
+            }
         }
 
         private static Size CalculateRatio(Size From, Size To)
@@ -173,9 +193,41 @@ namespace Lauren
 
             Rectangle cropRect = new Rectangle(CropLeft, CropTop, CurrentSize.Width - CropLeft - CropRight, CurrentSize.Height - CropTop - CropBottom);
             Image i2 = cropImage(Input, cropRect);
-            Bitmap retrn = new Bitmap(i2, NewSize);
+            Bitmap retrn = ResizeImage(i2, NewSize.Width,NewSize.Height);
             i2.Dispose();
             return retrn;
+        }
+
+        /// <summary>
+        /// Resize the image to the specified width and height.
+        /// </summary>
+        /// <param name="image">The image to resize.</param>
+        /// <param name="width">The width to resize to.</param>
+        /// <param name="height">The height to resize to.</param>
+        /// <returns>The resized image.</returns>
+        public static Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
         }
 
         private static Image cropImage(Image img, Rectangle cropArea)
@@ -186,29 +238,50 @@ namespace Lauren
             return bmpImage2;
         }
 
-        private long Resize_Image(string Extension, string filename, Image Original, Size s, ref PictureBox output)
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
+
+        private long Resize_Image(string Extension, string filename, Image Original, Size s, PictureBox output)
         {
             System.IO.FileInfo fi = new System.IO.FileInfo(filename);
             string sSmallest = fi.DirectoryName + "\\" + fi.Name.Remove(fi.Name.Length - fi.Extension.Length) + "_" + Extension + ".jpg";
             Image i = CalculateAndCropImage(0.05, s, Original);
 
             Bitmap smallest = new Bitmap(i, s);
-            smallest.Save(sSmallest, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
+            System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+            EncoderParameters myEncoderParameters = new EncoderParameters(1);
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, (long)trackBar1.Value);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            smallest.Save(sSmallest, jpgEncoder, myEncoderParameters);
+
             smallest.Dispose();
             fi = new System.IO.FileInfo(sSmallest);
             using (Image h = Image.FromFile(sSmallest))
             {
                 Bitmap h2 = new Bitmap(h);
                 output.Image = h2;
-                h.Dispose();
             }
 
             return fi.Length;
         }
 
-        private long Resize_Image(string filename, Image Original, ref PictureBox output)
+        private long Resize_Image(string filename, Image Original, PictureBox output)
         {
-            return Resize_Image(output.Tag.ToString(), filename, Original, output.Size, ref output);
+            return Resize_Image(output.Tag.ToString(), filename, Original, output.Size, output);
         }
 
         private void textBox1_DragDrop(object sender, DragEventArgs e)
@@ -254,6 +327,20 @@ namespace Lauren
                 ResizePicture();
                 DrawFocalPoint(FocalPoint);
             }
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            try{
+                ResizePicture();
+                DrawFocalPoint(FocalPoint);
+            } catch { }
+
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            label2.Text = trackBar1.Value.ToString();
         }
     }
 }
