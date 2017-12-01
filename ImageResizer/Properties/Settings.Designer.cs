@@ -12,7 +12,7 @@ namespace Lauren.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
     public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -38,12 +38,204 @@ namespace Lauren.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("70")]
-        public long DefaultCompression {
+        public int DefaultCompression {
             get {
-                return ((long)(this["DefaultCompression"]));
+                return ((int)(this["DefaultCompression"]));
             }
             set {
                 this["DefaultCompression"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90x90;300x167;300x225;300x450;620x439;940x530")]
+        public string Profile1Sizes {
+            get {
+                return ((string)(this["Profile1Sizes"]));
+            }
+            set {
+                this["Profile1Sizes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90x90;300x167;300x225;300x450;620x439;940x530")]
+        public string Profile2Sizes {
+            get {
+                return ((string)(this["Profile2Sizes"]));
+            }
+            set {
+                this["Profile2Sizes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90x90;300x167;300x225;300x450;620x439;940x530")]
+        public string Profile3Sizes {
+            get {
+                return ((string)(this["Profile3Sizes"]));
+            }
+            set {
+                this["Profile3Sizes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90x90;300x167;300x225;300x450;620x439;940x530")]
+        public string Profile4Sizes {
+            get {
+                return ((string)(this["Profile4Sizes"]));
+            }
+            set {
+                this["Profile4Sizes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
+        public int Profile1Compression {
+            get {
+                return ((int)(this["Profile1Compression"]));
+            }
+            set {
+                this["Profile1Compression"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int Profile2Compression {
+            get {
+                return ((int)(this["Profile2Compression"]));
+            }
+            set {
+                this["Profile2Compression"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
+        public int Profile3Compression {
+            get {
+                return ((int)(this["Profile3Compression"]));
+            }
+            set {
+                this["Profile3Compression"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public int Profile4Compression {
+            get {
+                return ((int)(this["Profile4Compression"]));
+            }
+            set {
+                this["Profile4Compression"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
+        public string Profile1Name {
+            get {
+                return ((string)(this["Profile1Name"]));
+            }
+            set {
+                this["Profile1Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("CMS")]
+        public string Profile2Name {
+            get {
+                return ((string)(this["Profile2Name"]));
+            }
+            set {
+                this["Profile2Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Feature")]
+        public string Profile3Name {
+            get {
+                return ((string)(this["Profile3Name"]));
+            }
+            set {
+                this["Profile3Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Fashion")]
+        public string Profile4Name {
+            get {
+                return ((string)(this["Profile4Name"]));
+            }
+            set {
+                this["Profile4Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Profile1MaxSize {
+            get {
+                return ((int)(this["Profile1MaxSize"]));
+            }
+            set {
+                this["Profile1MaxSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Profile2MaxSize {
+            get {
+                return ((int)(this["Profile2MaxSize"]));
+            }
+            set {
+                this["Profile2MaxSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Profile3MaxSize {
+            get {
+                return ((int)(this["Profile3MaxSize"]));
+            }
+            set {
+                this["Profile3MaxSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int Profile4MaxSize {
+            get {
+                return ((int)(this["Profile4MaxSize"]));
+            }
+            set {
+                this["Profile4MaxSize"] = value;
             }
         }
     }

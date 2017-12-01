@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lauren
@@ -21,22 +17,28 @@ namespace Lauren
         public Lauren()
         {
             InitializeComponent();
-            List<String> sizes = Properties.Settings.Default.Sizes.Split(';').ToList();
-
-            foreach (string size in sizes)
-            {
-                pictureBoxes.Add(createPictureBox(Convert.ToInt16(size.Split('x').First()), Convert.ToInt16(size.Split('x').Last())));
-            }
-
-            trackBar1.Value = (int)Properties.Settings.Default.DefaultCompression;
-            label2.Text = trackBar1.Value.ToString();
+            SetupProfiles();
+            radioButton1.Checked = true;
         }
 
-        private PictureBox createPictureBox(int x, int y)
+        private void SetupSizes(List<String> sizes, int CompressionValue, int MaxSize, string ProfileName = "")
+        {
+            pictureBoxes.Clear();
+            foreach (string size in sizes)
+            {
+                pictureBoxes.Add(CreatePictureBox(Convert.ToInt16(size.Split('x').First()), Convert.ToInt16(size.Split('x').Last()), ProfileName));
+            }
+
+            trackBar1.Value = CompressionValue;
+            label2.Text = trackBar1.Value.ToString();
+            label3.Text = MaxSize.ToString();
+        }
+
+        private PictureBox CreatePictureBox(int x, int y, string ProfileName)
         {
             PictureBox picture = new PictureBox();
             picture.Size = new Size(x, y);
-            picture.Tag = String.Format("{0}x{1}", x, y);
+            picture.Tag = String.Format("{2}{0}x{1}", x, y, ProfileName);
             return picture;
         }
 
@@ -76,6 +78,7 @@ namespace Lauren
             PicOrig.Invalidate();
             return xy;
         }
+
         private void ResizePicture()
         {
             Image Orig = Image.FromFile(openFileDialog1.FileName);
@@ -83,7 +86,17 @@ namespace Lauren
 
             foreach (PictureBox pictureBox in pictureBoxes)
             {
-                Resize_Image(openFileDialog1.FileName, PicOrig.Image, pictureBox);
+                long fileSize = 0;
+                long maxFileSize = Convert.ToInt64(label3.Text)*1024;
+                long compression = (long)trackBar1.Value;
+
+                fileSize = Resize_Image(openFileDialog1.FileName, PicOrig.Image, pictureBox, compression);
+
+                while (fileSize > maxFileSize && compression > 10 && maxFileSize > 0)
+                {
+                    fileSize = Resize_Image(openFileDialog1.FileName, PicOrig.Image, pictureBox, compression);
+                    compression -= 1;
+                }
             }
         }
 
@@ -253,7 +266,7 @@ namespace Lauren
             return null;
         }
 
-        private long Resize_Image(string Extension, string filename, Image Original, Size s, PictureBox output)
+        private long Resize_Image(string Extension, string filename, Image Original, Size s, PictureBox output, long compression)
         {
             System.IO.FileInfo fi = new System.IO.FileInfo(filename);
             string sSmallest = fi.DirectoryName + "\\" + fi.Name.Remove(fi.Name.Length - fi.Extension.Length) + "_" + Extension + ".jpg";
@@ -264,7 +277,7 @@ namespace Lauren
             ImageCodecInfo jpgEncoder = GetEncoder(ImageFormat.Jpeg);
             System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
             EncoderParameters myEncoderParameters = new EncoderParameters(1);
-            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, (long)trackBar1.Value);
+            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, compression);
             myEncoderParameters.Param[0] = myEncoderParameter;
             smallest.Save(sSmallest, jpgEncoder, myEncoderParameters);
 
@@ -279,9 +292,9 @@ namespace Lauren
             return fi.Length;
         }
 
-        private long Resize_Image(string filename, Image Original, PictureBox output)
+        private long Resize_Image(string filename, Image Original, PictureBox output, long compression)
         {
-            return Resize_Image(output.Tag.ToString(), filename, Original, output.Size, output);
+            return Resize_Image(output.Tag.ToString(), filename, Original, output.Size, output, compression);
         }
 
         private void textBox1_DragDrop(object sender, DragEventArgs e)
@@ -338,9 +351,45 @@ namespace Lauren
 
         }
 
+        private void SetupProfiles()
+        {
+            if (Properties.Settings.Default.Profile1Name == String.Empty) radioButton1.Visible = false;
+            radioButton1.Text = Properties.Settings.Default.Profile1Name;
+
+            if (Properties.Settings.Default.Profile2Name == String.Empty) radioButton2.Visible = false;
+            radioButton2.Text = Properties.Settings.Default.Profile2Name;
+
+            if (Properties.Settings.Default.Profile3Name == String.Empty) radioButton3.Visible = false;
+            radioButton3.Text = Properties.Settings.Default.Profile3Name;
+
+            if (Properties.Settings.Default.Profile4Name == String.Empty) radioButton4.Visible = false;
+            radioButton4.Text = Properties.Settings.Default.Profile4Name;
+        }
+
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             label2.Text = trackBar1.Value.ToString();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            SetupSizes(Properties.Settings.Default.Profile1Sizes.Split(';').ToList(), (int)Properties.Settings.Default.Profile1Compression, (int)Properties.Settings.Default.Profile1MaxSize, Properties.Settings.Default.Profile1Name);
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            SetupSizes(Properties.Settings.Default.Profile2Sizes.Split(';').ToList(), (int)Properties.Settings.Default.Profile2Compression, (int)Properties.Settings.Default.Profile2MaxSize, Properties.Settings.Default.Profile2Name);
+
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            SetupSizes(Properties.Settings.Default.Profile3Sizes.Split(';').ToList(), (int)Properties.Settings.Default.Profile3Compression, (int)Properties.Settings.Default.Profile3MaxSize, Properties.Settings.Default.Profile3Name);
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            SetupSizes(Properties.Settings.Default.Profile4Sizes.Split(';').ToList(), (int)Properties.Settings.Default.Profile4Compression, (int)Properties.Settings.Default.Profile4MaxSize, Properties.Settings.Default.Profile4Name);
         }
     }
 }

@@ -5,8 +5,56 @@
     <Setting Name="Sizes" Type="System.String" Scope="User">
       <Value Profile="(Default)">90x90;300x167;300x225;300x450;620x439;940x530</Value>
     </Setting>
-    <Setting Name="DefaultCompression" Type="System.Int64" Scope="User">
+    <Setting Name="DefaultCompression" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">70</Value>
+    </Setting>
+    <Setting Name="Profile1Sizes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">90x90;300x167;300x225;300x450;620x439;940x530</Value>
+    </Setting>
+    <Setting Name="Profile2Sizes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">90x90;300x167;300x225;300x450;620x439;940x530</Value>
+    </Setting>
+    <Setting Name="Profile3Sizes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">90x90;300x167;300x225;300x450;620x439;940x530</Value>
+    </Setting>
+    <Setting Name="Profile4Sizes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">90x90;300x167;300x225;300x450;620x439;940x530</Value>
+    </Setting>
+    <Setting Name="Profile1Compression" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">70</Value>
+    </Setting>
+    <Setting Name="Profile2Compression" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="Profile3Compression" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">70</Value>
+    </Setting>
+    <Setting Name="Profile4Compression" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
+    <Setting Name="Profile1Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
+    <Setting Name="Profile2Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CMS</Value>
+    </Setting>
+    <Setting Name="Profile3Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Feature</Value>
+    </Setting>
+    <Setting Name="Profile4Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Fashion</Value>
+    </Setting>
+    <Setting Name="Profile1MaxSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Profile2MaxSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Profile3MaxSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Profile4MaxSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
     </Setting>
   </Settings>
 </SettingsFile>
