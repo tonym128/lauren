@@ -2,6 +2,8 @@
 Largely AUtomated REsiziNg app
 
 ## What is Lauren
+It's a Windows C# application.
+
 It's an automated image resizer with some configuration for allowing it to crop and resize files the way you want.
 
 There's options for :
