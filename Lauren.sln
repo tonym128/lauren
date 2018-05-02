@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22310.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lauren", "ImageResizer\Lauren.csproj", "{724EF7C0-73BA-4105-950E-9B2B8BA752F1}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{54DC608B-ADC3-494F-8C55-730D50006F67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,17 @@ Global
 		{724EF7C0-73BA-4105-950E-9B2B8BA752F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{724EF7C0-73BA-4105-950E-9B2B8BA752F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{724EF7C0-73BA-4105-950E-9B2B8BA752F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54DC608B-ADC3-494F-8C55-730D50006F67}.Debug|Any CPU.ActiveCfg = Debug
+		{54DC608B-ADC3-494F-8C55-730D50006F67}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A4A0293-39A1-479C-A8E3-92871C1CBC2D}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 EndGlobal
