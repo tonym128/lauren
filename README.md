@@ -2,7 +2,7 @@
 Largely AUtomated REsiziNg app
 
 ## What is Lauren
-See here for the premise - http://ttech.tonym128.com/2018/03/08/the-creation-of-the-lauren/
+See here for the premise - https://ttech.mamacos.media/2018/03/08/the-creation-of-the-lauren.html
 
 It's a Windows C# application.
 
